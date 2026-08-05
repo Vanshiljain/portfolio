@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { profile } from "../data/resume";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const LINKS = [
   { href: "#about", label: "About", num: "01" },
@@ -14,6 +15,7 @@ const LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -21,6 +23,16 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  function handleNavClick(e, href) {
+    e.preventDefault();
+    setOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      history.pushState(null, "", href);
+    }
+  }
 
   return (
     <motion.header
@@ -34,6 +46,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-10">
         <a
           href="#top"
+          onClick={(e) => handleNavClick(e, "#top")}
           className="font-mono text-sm tracking-wider text-paper cursor-hover"
         >
           <span className="text-amber-400">/</span>vanshil-jain
@@ -44,6 +57,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="group relative font-mono text-xs uppercase tracking-widest text-paper-dim transition-colors hover:text-paper cursor-hover"
               >
                 <span className="mr-1.5 text-cobalt-400">{link.num}</span>
@@ -87,7 +101,7 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="block py-2.5 font-mono text-sm uppercase tracking-widest text-paper-dim"
                   >
                     <span className="mr-2 text-cobalt-400">{link.num}</span>
