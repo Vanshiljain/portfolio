@@ -57,7 +57,7 @@ export default function Skills() {
             className="pointer-events-none absolute inset-0 opacity-[0.15]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 1px 1px, rgba(91,124,255,0.6) 1px, transparent 0)",
+                "radial-gradient(circle at 1px 1px, rgba(20,166,204,0.6) 1px, transparent 0)",
               backgroundSize: "28px 28px",
             }}
           />
@@ -77,7 +77,7 @@ export default function Skills() {
                   animate={{ opacity: 1, scale: 1 }}
                   whileHover={{ y: -3, scale: 1.04 }}
                   transition={{ delay: i * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="cursor-hover rounded-full border border-cobalt-400/25 bg-ink-800/60 px-5 py-2.5 font-mono text-sm text-paper transition-colors hover:border-amber-400/50 hover:text-amber-300 hover:shadow-[0_8px_24px_-8px_rgba(255,184,77,0.35)]"
+                  className="cursor-hover rounded-full border border-cobalt-400/25 bg-ink-800/60 px-5 py-2.5 font-mono text-sm text-paper transition-colors hover:border-amber-400/50 hover:text-amber-300 hover:shadow-[0_8px_24px_-8px_rgba(0,217,255,0.35)]"
                 >
                   {skill}
                 </motion.span>

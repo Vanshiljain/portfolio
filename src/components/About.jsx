@@ -46,7 +46,6 @@ export function SectionLabel({ num, label }) {
   return (
     <Reveal direction="up" duration={0.5}>
       <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-cobalt-300">
-        <span className="text-amber-400">//</span>
         <span>{num}</span>
         <span className="h-px w-8 bg-cobalt-500/40" />
         <span>{label}</span>

@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* -- Signal palette --------------------------------------------------- */
-  /* Deep ink-indigo ground (not near-black), dual signal accents: cobalt + amber */
-  --color-ink-950: #05070d;
-  --color-ink-900: #0a0e1a;
-  --color-ink-800: #101524;
-  --color-ink-700: #171d33;
-  --color-ink-600: #212944;
-  --color-ink-500: #313c5e;
+  /* -- Midnight Tech palette --------------------------------------------- */
+  /* Deep navy ground, single electric-cyan signal modulated across two   */
+  /* registers: cobalt = cool structural cyan, amber = bright accent cyan */
+  --color-ink-950: #05071a;
+  --color-ink-900: #0a0e27;
+  --color-ink-800: #10163a;
+  --color-ink-700: #161d4a;
+  --color-ink-600: #202a5e;
+  --color-ink-500: #2e3a7a;
 
-  --color-paper: #f4f1ea;
-  --color-paper-dim: #c9c6c2;
+  --color-paper: #eaf6fb;
+  --color-paper-dim: #9aacc9;
 
-  --color-cobalt-300: #9db4ff;
-  --color-cobalt-400: #7b96ff;
-  --color-cobalt-500: #5b7cff;
-  --color-cobalt-600: #3f5ce0;
+  --color-cobalt-300: #6fd9f0;
+  --color-cobalt-400: #38c6e8;
+  --color-cobalt-500: #14a6cc;
+  --color-cobalt-600: #0c82a8;
 
-  --color-amber-300: #ffd28a;
-  --color-amber-400: #ffb84d;
-  --color-amber-500: #f5a623;
+  --color-amber-300: #b6f5ff;
+  --color-amber-400: #00d9ff;
+  --color-amber-500: #00b8de;
 
   --font-display: "Fraunces", "Iowan Old Style", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;

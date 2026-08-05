@@ -57,7 +57,7 @@ export default function Hero() {
       id="top"
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink-900"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(91,124,255,0.16),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(20,166,204,0.16),transparent)]" />
 
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="blob absolute -left-32 top-10 h-96 w-96 rounded-full bg-cobalt-600/25 blur-[110px]" />
