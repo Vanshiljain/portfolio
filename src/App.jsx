@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <>
+      <div className="film-grain bg-noise" aria-hidden="true" />
       <CustomCursor />
       <ScrollProgress />
       <Navbar />

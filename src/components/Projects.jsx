@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Reveal, { RevealGroup, RevealItem } from "./Reveal";
 import { SectionLabel } from "./About";
 import TiltCard from "./TiltCard";
+import Glow from "./Glow";
 import { projects } from "../data/resume";
 
 export default function Projects() {
@@ -10,7 +11,8 @@ export default function Projects() {
 
   return (
     <section id="projects" className="relative bg-ink-950 px-6 py-28 md:px-10 md:py-36">
-      <div className="mx-auto max-w-7xl">
+      <Glow variant="reverse" />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel num="04" label="Projects" />
 
         <Reveal direction="up" delay={0.1}>
@@ -41,7 +43,7 @@ function FeaturedCard({ project }) {
   return (
     <TiltCard
       max={5}
-      className="cursor-hover group relative overflow-hidden rounded-3xl border border-amber-400/25 bg-gradient-to-br from-ink-800/80 via-ink-900/60 to-ink-800/80 p-8 glow-amber md:p-14"
+      className="conic-border cursor-hover group relative overflow-hidden rounded-3xl bg-gradient-to-br from-ink-800/80 via-ink-900/60 to-ink-800/80 p-8 glow-amber md:p-14"
     >
       <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gradient-to-br from-amber-400/25 to-cobalt-500/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-cobalt-500/15 blur-3xl" />

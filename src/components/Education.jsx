@@ -1,11 +1,13 @@
 import Reveal from "./Reveal";
 import { SectionLabel } from "./About";
+import Glow from "./Glow";
 import { education } from "../data/resume";
 
 export default function Education() {
   return (
     <section id="education" className="relative bg-ink-900 px-6 py-28 md:px-10 md:py-36">
-      <div className="mx-auto max-w-7xl">
+      <Glow />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel num="05" label="Education" />
 
         <Reveal direction="up" delay={0.15} className="mt-10">

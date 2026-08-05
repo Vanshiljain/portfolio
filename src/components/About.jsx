@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
 import Reveal, { RevealGroup, RevealItem } from "./Reveal";
 import CountUp from "./CountUp";
+import Glow from "./Glow";
 import { summary, stats } from "../data/resume";
 
 export default function About() {
   return (
     <section id="about" className="relative bg-ink-900 px-6 py-28 md:px-10 md:py-36">
-      <div className="mx-auto max-w-7xl">
+      <Glow />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel num="01" label="About" />
 
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-12">

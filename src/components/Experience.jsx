@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Reveal, { RevealGroup, RevealItem } from "./Reveal";
 import { SectionLabel } from "./About";
+import Glow from "./Glow";
 import { experience } from "../data/resume";
 
 export default function Experience() {
@@ -14,7 +15,8 @@ export default function Experience() {
 
   return (
     <section id="experience" className="relative bg-ink-900 px-6 py-28 md:px-10 md:py-36">
-      <div className="mx-auto max-w-7xl">
+      <Glow />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel num="03" label="Experience" />
 
         <Reveal direction="up" delay={0.1}>

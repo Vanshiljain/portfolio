@@ -19,9 +19,9 @@ export default function PipelineCanvas() {
     let raf;
     let mouse = { x: 0, y: 0, active: false };
 
-    const COBALT = "20, 166, 204";
-    const AMBER = "0, 217, 255";
-    const PAPER = "234, 246, 251";
+    const COBALT = "176, 107, 255";
+    const AMBER = "255, 95, 63";
+    const PAPER = "247, 240, 255";
 
     function layout() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);

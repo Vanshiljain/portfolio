@@ -49,7 +49,7 @@ export default function Navbar() {
           onClick={(e) => handleNavClick(e, "#top")}
           className="font-mono text-sm tracking-wider text-paper cursor-hover"
         >
-          <span className="text-amber-400">/</span>vanshil-jain
+          <span className="text-shimmer">/</span>vanshil-jain
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">

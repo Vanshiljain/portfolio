@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import PipelineCanvas from "./PipelineCanvas";
 import MagneticButton from "./MagneticButton";
 import { profile } from "../data/resume";
@@ -52,12 +52,25 @@ function useTypewriter(words, { typeSpeed = 55, deleteSpeed = 30, pause = 1600 }
 export default function Hero() {
   const typed = useTypewriter(ROLES);
 
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const springConfig = { stiffness: 120, damping: 20, mass: 0.4 };
+  const rotateX = useSpring(useTransform(my, [0, 1], [6, -6]), springConfig);
+  const rotateY = useSpring(useTransform(mx, [0, 1], [-6, 6]), springConfig);
+
+  function handlePointerMove(e) {
+    mx.set(e.clientX / window.innerWidth);
+    my.set(e.clientY / window.innerHeight);
+  }
+
   return (
     <section
       id="top"
+      onMouseMove={handlePointerMove}
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink-900"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(20,166,204,0.16),transparent)]" />
+      <div className="aurora-wash absolute inset-0 opacity-70 blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(176,107,255,0.18),transparent)]" />
 
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="blob absolute -left-32 top-10 h-96 w-96 rounded-full bg-cobalt-600/25 blur-[110px]" />
@@ -80,6 +93,7 @@ export default function Hero() {
         variants={container}
         initial="hidden"
         animate="show"
+        style={{ rotateX, rotateY, transformPerspective: 1200 }}
         className="relative z-10 mx-auto w-full max-w-7xl px-6 py-32 md:px-10"
       >
         <motion.p

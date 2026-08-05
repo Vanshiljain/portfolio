@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import { SectionLabel } from "./About";
+import Glow from "./Glow";
 import { profile } from "../data/resume";
 
 export default function Contact() {
@@ -24,7 +25,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative bg-ink-950 px-6 py-28 md:px-10 md:py-36">
-      <div className="mx-auto max-w-7xl">
+      <Glow variant="reverse" />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel num="06" label="Contact" />
 
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-12">
@@ -49,7 +51,7 @@ export default function Contact() {
           <Reveal direction="left" delay={0.15} className="md:col-span-7">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-6 rounded-3xl border border-cobalt-500/15 bg-ink-800/30 p-8 md:p-10"
+              className="conic-border flex flex-col gap-6 rounded-3xl bg-ink-800/40 p-8 backdrop-blur-sm md:p-10"
             >
               <Field label="Name" name="name" value={form.name} onChange={handleChange} required />
               <Field

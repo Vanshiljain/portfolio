@@ -1,31 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  /* -- Midnight Tech palette --------------------------------------------- */
-  /* Deep navy ground, single electric-cyan signal modulated across two   */
-  /* registers: cobalt = cool structural cyan, amber = bright accent cyan */
-  --color-ink-950: #05071a;
-  --color-ink-900: #0a0e27;
-  --color-ink-800: #10163a;
-  --color-ink-700: #161d4a;
-  --color-ink-600: #202a5e;
-  --color-ink-500: #2e3a7a;
+  /* -- Nova Aurora palette ------------------------------------------------ */
+  /* Deep plum-black void, split-complementary signal: violet (cobalt slot) */
+  /* for structure, molten coral (amber slot) for the electric accent.     */
+  --color-ink-950: #0a0613;
+  --color-ink-900: #130b21;
+  --color-ink-800: #1e1233;
+  --color-ink-700: #2a1948;
+  --color-ink-600: #382060;
+  --color-ink-500: #4a2c7d;
 
-  --color-paper: #eaf6fb;
-  --color-paper-dim: #9aacc9;
+  --color-paper: #f7f0ff;
+  --color-paper-dim: #b7a6d9;
 
-  --color-cobalt-300: #6fd9f0;
-  --color-cobalt-400: #38c6e8;
-  --color-cobalt-500: #14a6cc;
-  --color-cobalt-600: #0c82a8;
+  --color-cobalt-300: #d8b8ff;
+  --color-cobalt-400: #b06bff;
+  --color-cobalt-500: #9333ea;
+  --color-cobalt-600: #6f21b8;
 
-  --color-amber-300: #b6f5ff;
-  --color-amber-400: #00d9ff;
-  --color-amber-500: #00b8de;
+  --color-amber-300: #ffb199;
+  --color-amber-400: #ff5f3f;
+  --color-amber-500: #ea3f22;
 
   --font-display: "Fraunces", "Iowan Old Style", ui-serif, Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
 @layer base {
@@ -160,6 +166,65 @@
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
+
+  .film-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+  }
+
+  /* Animated aurora mesh — drifting multi-stop color wash */
+  .aurora-wash {
+    background:
+      radial-gradient(52% 42% at 18% 22%, color-mix(in srgb, var(--color-cobalt-500) 55%, transparent), transparent 60%),
+      radial-gradient(46% 38% at 82% 28%, color-mix(in srgb, var(--color-amber-500) 45%, transparent), transparent 60%),
+      radial-gradient(55% 45% at 45% 92%, color-mix(in srgb, var(--color-cobalt-600) 45%, transparent), transparent 60%);
+    background-size: 180% 180%;
+    animation: aurora-drift 24s ease-in-out infinite;
+  }
+
+  /* Rotating conic-gradient ring, revealed only along a 1px border via mask */
+  .conic-border {
+    position: relative;
+    isolation: isolate;
+  }
+  .conic-border::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--angle),
+      var(--color-cobalt-500),
+      var(--color-amber-400),
+      var(--color-cobalt-300),
+      var(--color-cobalt-500)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: conic-spin 5s linear infinite;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      100deg,
+      var(--color-paper-dim) 20%,
+      var(--color-paper) 40%,
+      var(--color-amber-300) 50%,
+      var(--color-paper) 60%,
+      var(--color-paper-dim) 80%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: signal-sheen 5s linear infinite;
+  }
 }
 
 @keyframes signal-sheen {
@@ -197,10 +262,44 @@
   animation: blob-float 18s ease-in-out infinite;
 }
 
+@keyframes aurora-drift {
+  0%,
+  100% {
+    background-position: 0% 0%, 100% 0%, 50% 100%;
+  }
+  50% {
+    background-position: 30% 40%, 65% 60%, 35% 65%;
+  }
+}
+
+@keyframes conic-spin {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(3deg);
+  }
+}
+
+.float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .blob,
-  .text-gradient-signal-animated {
+  .text-gradient-signal-animated,
+  .aurora-wash,
+  .conic-border::before,
+  .text-shimmer,
+  .float-slow {
     animation: none !important;
   }
 }

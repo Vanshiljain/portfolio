@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "./Reveal";
 import { SectionLabel } from "./About";
+import Glow from "./Glow";
 import { skillGroups } from "../data/resume";
 
 export default function Skills() {
@@ -10,7 +11,8 @@ export default function Skills() {
 
   return (
     <section id="skills" className="relative bg-ink-950 px-6 py-28 md:px-10 md:py-36">
-      <div className="mx-auto max-w-7xl">
+      <Glow variant="reverse" />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel num="02" label="Skills" />
 
         <Reveal direction="up" delay={0.1}>
@@ -52,12 +54,12 @@ export default function Skills() {
           </div>
         </Reveal>
 
-        <div className="relative mt-12 min-h-[220px] overflow-hidden rounded-3xl border border-cobalt-500/15 bg-ink-900/60 p-8 md:p-12">
+        <div className="conic-border relative mt-12 min-h-[220px] overflow-hidden rounded-3xl bg-ink-900/60 p-8 md:p-12">
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.15]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 1px 1px, rgba(20,166,204,0.6) 1px, transparent 0)",
+                "radial-gradient(circle at 1px 1px, rgba(176,107,255,0.6) 1px, transparent 0)",
               backgroundSize: "28px 28px",
             }}
           />
@@ -77,7 +79,7 @@ export default function Skills() {
                   animate={{ opacity: 1, scale: 1 }}
                   whileHover={{ y: -3, scale: 1.04 }}
                   transition={{ delay: i * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="cursor-hover rounded-full border border-cobalt-400/25 bg-ink-800/60 px-5 py-2.5 font-mono text-sm text-paper transition-colors hover:border-amber-400/50 hover:text-amber-300 hover:shadow-[0_8px_24px_-8px_rgba(0,217,255,0.35)]"
+                  className="cursor-hover rounded-full border border-cobalt-400/25 bg-ink-800/60 px-5 py-2.5 font-mono text-sm text-paper transition-colors hover:border-amber-400/50 hover:text-amber-300 hover:shadow-[0_8px_24px_-8px_rgba(255,95,63,0.35)]"
                 >
                   {skill}
                 </motion.span>
