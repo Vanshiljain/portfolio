@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Reveal, { RevealGroup, RevealItem } from "./Reveal";
+import CountUp from "./CountUp";
 import { summary, stats } from "../data/resume";
 
 export default function About() {
@@ -11,7 +12,7 @@ export default function About() {
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-12">
           <Reveal direction="right" className="md:col-span-7">
             <h2 className="font-display text-4xl leading-[1.15] text-paper md:text-5xl">
-              I build the plumbing that lets{" "}
+              I build the orchestration layer that lets{" "}
               <span className="text-gradient-signal italic">AI agents</span>{" "}
               actually get work done.
             </h2>
@@ -23,9 +24,9 @@ export default function About() {
           <RevealGroup className="grid grid-cols-2 gap-6 md:col-span-5 md:gap-8">
             {stats.map((stat) => (
               <RevealItem key={stat.label}>
-                <div className="group relative rounded-2xl border border-cobalt-500/15 bg-ink-800/40 p-6 transition-colors hover:border-amber-400/30">
+                <div className="group relative rounded-2xl border border-cobalt-500/15 bg-ink-800/40 p-6 transition-colors hover:border-amber-400/30 hover:-translate-y-1 duration-300">
                   <p className="font-display text-4xl text-paper md:text-5xl">
-                    {stat.value}
+                    <CountUp value={stat.value} />
                   </p>
                   <p className="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-widest text-paper-dim/70">
                     {stat.label}

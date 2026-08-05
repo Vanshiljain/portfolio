@@ -93,6 +93,22 @@
     color: transparent;
   }
 
+  .text-gradient-signal-animated {
+    background: linear-gradient(
+      110deg,
+      var(--color-cobalt-300) 0%,
+      var(--color-paper) 30%,
+      var(--color-amber-400) 50%,
+      var(--color-paper) 70%,
+      var(--color-cobalt-300) 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: signal-sheen 8s linear infinite;
+  }
+
   .node-border {
     border: 1px solid color-mix(in srgb, var(--color-cobalt-400) 25%, transparent);
   }
@@ -108,6 +124,78 @@
     opacity: 0.035;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .glass-panel {
+    background: color-mix(in srgb, var(--color-ink-800) 55%, transparent);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid color-mix(in srgb, var(--color-cobalt-400) 14%, transparent);
+  }
+
+  .glow-cobalt {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-cobalt-400) 25%, transparent),
+      0 20px 60px -20px color-mix(in srgb, var(--color-cobalt-500) 55%, transparent);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 40px -8px color-mix(in srgb, var(--color-amber-400) 55%, transparent);
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 32s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes signal-sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: -250% 50%;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(4%, -6%) scale(1.08);
+  }
+  66% {
+    transform: translate(-3%, 4%) scale(0.95);
+  }
+}
+
+.blob {
+  animation: blob-float 18s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .blob,
+  .text-gradient-signal-animated {
+    animation: none !important;
   }
 }
 

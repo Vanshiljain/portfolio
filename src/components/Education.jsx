@@ -9,7 +9,7 @@ export default function Education() {
         <SectionLabel num="05" label="Education" />
 
         <Reveal direction="up" delay={0.15} className="mt-10">
-          <div className="flex flex-col gap-8 rounded-3xl border border-cobalt-500/15 bg-ink-800/30 p-8 md:flex-row md:items-center md:justify-between md:p-12">
+          <div className="group flex flex-col gap-8 rounded-3xl border border-cobalt-500/15 bg-ink-800/30 p-8 transition-colors duration-300 hover:border-amber-400/25 md:flex-row md:items-center md:justify-between md:p-12">
             <div>
               <h3 className="font-display text-2xl text-paper md:text-3xl">
                 {education.degree}

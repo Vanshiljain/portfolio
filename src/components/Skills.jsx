@@ -39,7 +39,14 @@ export default function Skills() {
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">{group.label}</span>
+                <span className="relative z-10">
+                  {group.label}
+                  <span
+                    className={`ml-2 ${active === group.key ? "text-ink-950/50" : "text-paper-dim/40"}`}
+                  >
+                    {group.items.length}
+                  </span>
+                </span>
               </button>
             ))}
           </div>
@@ -68,8 +75,9 @@ export default function Skills() {
                   key={skill}
                   initial={{ opacity: 0, scale: 0.85 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="cursor-hover rounded-full border border-cobalt-400/25 bg-ink-800/60 px-5 py-2.5 font-mono text-sm text-paper transition-colors hover:border-amber-400/50 hover:text-amber-300"
+                  whileHover={{ y: -3, scale: 1.04 }}
+                  transition={{ delay: i * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="cursor-hover rounded-full border border-cobalt-400/25 bg-ink-800/60 px-5 py-2.5 font-mono text-sm text-paper transition-colors hover:border-amber-400/50 hover:text-amber-300 hover:shadow-[0_8px_24px_-8px_rgba(255,184,77,0.35)]"
                 >
                   {skill}
                 </motion.span>

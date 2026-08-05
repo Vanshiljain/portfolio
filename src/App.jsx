@@ -1,6 +1,8 @@
 import CustomCursor from "./components/CustomCursor";
+import ScrollProgress from "./components/ScrollProgress";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Marquee from "./components/Marquee";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
@@ -13,9 +15,11 @@ function App() {
   return (
     <>
       <CustomCursor />
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
+        <Marquee />
         <About />
         <Skills />
         <Experience />
