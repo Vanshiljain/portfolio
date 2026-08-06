@@ -1,37 +1,58 @@
-import Reveal from "./Reveal";
+import { motion } from "framer-motion";
+import { ScanReveal } from "./Reveal";
 import { SectionLabel } from "./About";
+import HUDCard from "./HUDCard";
 import Glow from "./Glow";
 import { education } from "../data/resume";
 
+const LOG_LINES = [
+  { prefix: "degree", value: education.degree },
+  { prefix: "institution", value: education.school },
+  { prefix: "location", value: education.location },
+  { prefix: "period", value: education.period },
+  { prefix: "result", value: education.detail, accent: true },
+];
+
 export default function Education() {
   return (
-    <section id="education" className="relative bg-ink-900 px-6 py-28 md:px-10 md:py-36">
+    <section id="education" className="relative px-6 py-28 md:px-10 md:py-36">
       <Glow />
       <div className="relative mx-auto max-w-7xl">
         <SectionLabel num="05" label="Education" />
 
-        <Reveal direction="up" delay={0.15} className="mt-10">
-          <div className="group flex flex-col gap-8 rounded-3xl border border-cobalt-500/15 bg-ink-800/30 p-8 transition-colors duration-300 hover:border-amber-400/25 md:flex-row md:items-center md:justify-between md:p-12">
-            <div>
-              <h3 className="font-display text-2xl text-paper md:text-3xl">
-                {education.degree}
-              </h3>
-              <p className="mt-2 font-mono text-sm text-cobalt-300">{education.school}</p>
-              <p className="mt-1 text-sm text-paper-dim">{education.location}</p>
-            </div>
+        <ScanReveal className="mt-10 max-w-2xl font-display text-4xl leading-tight text-paper md:text-5xl" delay={0.1}>
+          Where the <span className="text-gradient-signal italic">fundamentals</span> were laid.
+        </ScanReveal>
 
-            <div className="flex gap-8 md:flex-col md:items-end md:text-right">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-widest text-paper-dim/70">
-                  {education.period}
-                </p>
-              </div>
-              <div>
-                <p className="font-display text-3xl text-amber-300">{education.detail}</p>
-              </div>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ staggerChildren: 0.12, delayChildren: 0.1 }}
+          className="mt-12"
+        >
+          <HUDCard tilt={4} className="scanlines p-8 md:p-12">
+            <div className="flex flex-col gap-3 font-mono text-sm">
+              {LOG_LINES.map((line) => (
+                <motion.p
+                  key={line.prefix}
+                  variants={{
+                    hidden: { opacity: 0, x: -12 },
+                    show: { opacity: 1, x: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
+                  }}
+                  className={line.accent ? "text-magenta-300" : "text-paper-dim"}
+                >
+                  <span className="text-cyan-400">{"> "}</span>
+                  <span className="text-cyan-300">{line.prefix}</span>
+                  <span className="text-paper-dim/50">: </span>
+                  <span className={line.accent ? "font-display text-lg text-magenta-200" : "text-paper"}>
+                    {line.value}
+                  </span>
+                </motion.p>
+              ))}
             </div>
-          </div>
-        </Reveal>
+          </HUDCard>
+        </motion.div>
       </div>
     </section>
   );

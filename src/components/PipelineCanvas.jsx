@@ -19,9 +19,9 @@ export default function PipelineCanvas() {
     let raf;
     let mouse = { x: 0, y: 0, active: false };
 
-    const COBALT = "176, 107, 255";
-    const AMBER = "255, 95, 63";
-    const PAPER = "247, 240, 255";
+    const CYAN = "62, 233, 255";
+    const MAGENTA = "255, 47, 208";
+    const PAPER = "234, 253, 255";
 
     function layout() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -67,7 +67,7 @@ export default function PipelineCanvas() {
           edge,
           t: Math.random(),
           speed: 0.0018 + Math.random() * 0.0025,
-          color: Math.random() > 0.5 ? COBALT : AMBER,
+          color: Math.random() > 0.5 ? CYAN : MAGENTA,
         }));
     }
 
@@ -83,7 +83,7 @@ export default function PipelineCanvas() {
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.quadraticCurveTo(mx, my, b.x, b.y);
-        ctx.strokeStyle = `rgba(${COBALT}, 0.08)`;
+        ctx.strokeStyle = `rgba(${CYAN}, 0.08)`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -116,7 +116,7 @@ export default function PipelineCanvas() {
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fillStyle = n.accent
-          ? `rgba(${AMBER}, ${0.35 + pulse * 0.4})`
+          ? `rgba(${MAGENTA}, ${0.35 + pulse * 0.4})`
           : `rgba(${PAPER}, ${0.18 + pulse * 0.25})`;
         ctx.fill();
       }

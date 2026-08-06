@@ -47,6 +47,22 @@ export function RevealGroup({ children, className = "", stagger = 0.12 }) {
   );
 }
 
+// Clip-path scan-wipe, reserved for section headings — reads as a HUD
+// panel powering on rather than a plain fade/slide.
+export function ScanReveal({ children, className = "", delay = 0, as: Component = motion.h2 }) {
+  return (
+    <Component
+      className={className}
+      initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0.4 }}
+      whileInView={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.9, delay, ease: [0.76, 0, 0.24, 1] }}
+    >
+      {children}
+    </Component>
+  );
+}
+
 export function RevealItem({ children, className = "", direction = "up" }) {
   const offset = DIRECTIONS[direction] ?? DIRECTIONS.up;
   return (

@@ -1,8 +1,16 @@
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import PipelineCanvas from "./PipelineCanvas";
-import MagneticButton from "./MagneticButton";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useMotionValue,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import HeroVisual from "./HeroVisual";
+import Button from "./Button";
 import TiltCard from "./TiltCard";
+import { ArrowIcon, DownloadIcon, NodeMarkIcon } from "./Icons";
 import { profile } from "../data/resume";
 
 const container = {
@@ -18,6 +26,12 @@ const item = {
 };
 
 const ROLES = ["Full Stack Engineer", "AI Agent Architect", "Backend Systems Builder"];
+
+const CHIPS = [
+  { label: "LangChain", cls: "left-[-8%] top-6" },
+  { label: "MCP", cls: "right-[-10%] top-1/3" },
+  { label: "Qdrant", cls: "left-[-4%] bottom-8" },
+];
 
 function useTypewriter(words, { typeSpeed = 55, deleteSpeed = 30, pause = 1600 } = {}) {
   const [index, setIndex] = useState(0);
@@ -52,6 +66,13 @@ function useTypewriter(words, { typeSpeed = 55, deleteSpeed = 30, pause = 1600 }
 
 export default function Hero() {
   const typed = useTypewriter(ROLES);
+  const heroRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const heroScrollRef = useRef(0);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    heroScrollRef.current = v;
+  });
 
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -67,28 +88,30 @@ export default function Hero() {
   return (
     <section
       id="top"
+      ref={heroRef}
       onMouseMove={handlePointerMove}
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink-900"
+      className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
       <div className="aurora-wash absolute inset-0 opacity-70 blur-3xl" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(176,107,255,0.18),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(62,233,255,0.14),transparent)]" />
 
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="blob absolute -left-32 top-10 h-96 w-96 rounded-full bg-cobalt-600/25 blur-[110px]" />
+        <div className="blob absolute -left-32 top-10 h-96 w-96 rounded-full bg-cyan-600/20 blur-[110px]" />
         <div
-          className="blob absolute right-[-6rem] top-1/3 h-[26rem] w-[26rem] rounded-full bg-amber-500/15 blur-[130px]"
+          className="blob absolute right-[-6rem] top-1/3 h-[26rem] w-[26rem] rounded-full bg-magenta-500/15 blur-[130px]"
           style={{ animationDelay: "-6s" }}
         />
         <div
-          className="blob absolute bottom-[-8rem] left-1/3 h-80 w-80 rounded-full bg-cobalt-400/10 blur-[100px]"
+          className="blob absolute bottom-[-8rem] left-1/3 h-80 w-80 rounded-full bg-cyan-400/10 blur-[100px]"
           style={{ animationDelay: "-11s" }}
         />
       </div>
 
-      <div className="absolute inset-0 opacity-70">
-        <PipelineCanvas />
+      <div className="absolute inset-0 opacity-90">
+        <HeroVisual scrollRef={heroScrollRef} />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-900" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-950/85 via-ink-950/15 to-transparent md:from-ink-950/90 md:via-ink-950/25 md:to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-950/90" />
 
       <motion.div
         variants={container}
@@ -101,28 +124,29 @@ export default function Hero() {
           <div className="md:col-span-7">
             <motion.p
               variants={item}
-              className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-cobalt-300"
+              className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-cyan-300"
             >
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-magenta-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-magenta-400" />
               </span>
               Open to work — Indore, India
             </motion.p>
 
             <motion.h1
               variants={item}
-              className="font-display text-[13vw] leading-[0.95] tracking-tight text-paper sm:text-6xl md:text-7xl lg:text-[6.5rem]"
+              data-text="Vanshil Jain"
+              className="glitch-text font-display text-[13vw] leading-[0.95] tracking-tight text-paper sm:text-6xl md:text-7xl lg:text-[6.5rem]"
             >
               Vanshil <span className="text-gradient-signal-animated italic">Jain</span>
             </motion.h1>
 
             <motion.div
               variants={item}
-              className="mt-6 flex h-8 items-center font-mono text-lg text-amber-300 md:text-xl"
+              className="mt-6 flex h-8 items-center font-mono text-lg text-magenta-300 md:text-xl"
             >
               <span>{typed}</span>
-              <span className="ml-1 inline-block h-[1.1em] w-[2px] animate-pulse bg-amber-300" />
+              <span className="ml-1 inline-block h-[1.1em] w-[2px] animate-pulse bg-magenta-300" />
             </motion.div>
 
             <motion.p
@@ -141,32 +165,21 @@ export default function Hero() {
             </motion.p>
 
             <motion.div variants={item} className="mt-12 flex flex-wrap items-center gap-4">
-              <MagneticButton
-                href="#projects"
-                className="cursor-hover group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-paper px-7 py-3.5 font-mono text-xs uppercase tracking-widest text-ink-950"
-              >
-                <span className="relative z-10">View the work</span>
-                <span className="relative z-10 transition-transform group-hover:translate-x-1">→</span>
-                <span className="absolute inset-0 -z-0 bg-gradient-to-r from-amber-400 to-cobalt-400 opacity-0 transition-opacity group-hover:opacity-100" />
-              </MagneticButton>
-
-              <MagneticButton
-                as="a"
-                href={profile.resumeFile}
-                download
-                className="cursor-hover inline-flex items-center gap-2 rounded-full border border-cobalt-400/30 px-7 py-3.5 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-amber-400 hover:text-amber-300"
-              >
-                Download résumé ↓
-              </MagneticButton>
+              <Button href="#projects" variant="solid" icon={<ArrowIcon />}>
+                View the work
+              </Button>
+              <Button as="a" href={profile.resumeFile} download variant="outline" icon={<DownloadIcon />}>
+                Résumé
+              </Button>
             </motion.div>
           </div>
 
           <motion.div
             variants={item}
-            className="flex justify-center md:col-span-5 md:justify-end"
+            className="relative flex justify-center md:col-span-5 md:justify-end"
           >
             <TiltCard className="group cursor-hover relative w-56 sm:w-64 md:w-full md:max-w-sm">
-              <div className="conic-border glow-cobalt relative aspect-square overflow-hidden rounded-[2rem] bg-ink-800">
+              <div className="conic-border glow-cyan relative aspect-square overflow-hidden rounded-[2rem] bg-ink-800">
                 <img
                   src="/profile.png"
                   alt="Vanshil Jain"
@@ -175,23 +188,35 @@ export default function Hero() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/40 via-transparent to-transparent" />
               </div>
             </TiltCard>
+
+            {CHIPS.map((chip, i) => (
+              <motion.div
+                key={chip.label}
+                animate={{ y: [0, -14, 0] }}
+                transition={{ duration: 6 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
+                className={`glass-panel pointer-events-none absolute hidden items-center gap-2 rounded-full px-3.5 py-2 font-mono text-[11px] uppercase tracking-widest text-cyan-200 shadow-[0_10px_30px_-10px_rgba(62,233,255,0.4)] sm:flex ${chip.cls}`}
+              >
+                <NodeMarkIcon className="h-3.5 w-3.5 text-magenta-300" />
+                {chip.label}
+              </motion.div>
+            ))}
           </motion.div>
         </div>
 
         <motion.div
           variants={item}
-          className="mt-24 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-cobalt-500/15 pt-6 font-mono text-[11px] uppercase tracking-widest text-paper-dim/70"
+          className="mt-24 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-cyan-500/15 pt-6 font-mono text-[11px] uppercase tracking-widest text-paper-dim/70"
         >
           <span>LangChain</span>
-          <span className="text-cobalt-500">·</span>
+          <span className="text-cyan-500">·</span>
           <span>MCP</span>
-          <span className="text-cobalt-500">·</span>
+          <span className="text-cyan-500">·</span>
           <span>Qdrant</span>
-          <span className="text-cobalt-500">·</span>
+          <span className="text-cyan-500">·</span>
           <span>NestJS</span>
-          <span className="text-cobalt-500">·</span>
+          <span className="text-cyan-500">·</span>
           <span>Claude AI</span>
-          <span className="text-cobalt-500">·</span>
+          <span className="text-cyan-500">·</span>
           <span>GraphQL</span>
         </motion.div>
       </motion.div>
@@ -208,7 +233,7 @@ export default function Hero() {
           className="flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-paper-dim/60"
         >
           Scroll
-          <span className="h-8 w-px bg-gradient-to-b from-cobalt-400 to-transparent" />
+          <span className="h-8 w-px bg-gradient-to-b from-cyan-400 to-transparent" />
         </motion.div>
       </motion.div>
     </section>

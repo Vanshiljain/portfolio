@@ -5,11 +5,11 @@ export default function Glow({ variant = "default" }) {
     return (
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
-          className="blob absolute -right-32 top-0 h-96 w-96 rounded-full bg-cobalt-600/20 blur-[110px]"
+          className="blob absolute -right-32 top-0 h-96 w-96 rounded-full bg-cyan-600/20 blur-[110px]"
           style={{ animationDelay: "-4s" }}
         />
         <div
-          className="blob absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-amber-500/15 blur-[120px]"
+          className="blob absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-magenta-500/15 blur-[120px]"
           style={{ animationDelay: "-13s" }}
         />
       </div>
@@ -19,11 +19,11 @@ export default function Glow({ variant = "default" }) {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div
-        className="blob absolute -left-28 top-0 h-96 w-96 rounded-full bg-cobalt-600/20 blur-[110px]"
+        className="blob absolute -left-28 top-0 h-96 w-96 rounded-full bg-cyan-600/20 blur-[110px]"
         style={{ animationDelay: "-2s" }}
       />
       <div
-        className="blob absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-amber-500/15 blur-[120px]"
+        className="blob absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-magenta-500/15 blur-[120px]"
         style={{ animationDelay: "-9s" }}
       />
     </div>
