@@ -48,15 +48,17 @@ export default function Preloader({ onComplete }) {
   }, [reducedMotion]);
 
   return (
-    <AnimatePresence onExitComplete={onComplete}>
+    <AnimatePresence
+      onExitComplete={() => {
+        document.body.style.overflow = "";
+        onComplete?.();
+      }}
+    >
       {visible && (
         <motion.div
           key="preloader"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: reducedMotion ? 0.15 : 0.4, delay: reducedMotion ? 0 : 0.35 } }}
-          onAnimationEnd={() => {
-            document.body.style.overflow = "";
-          }}
           className="fixed inset-0 z-[200] flex items-center justify-center bg-ink-950"
         >
           <motion.div

@@ -1,6 +1,7 @@
 import { Suspense, lazy, useMemo, useRef } from "react";
 import { useInView } from "framer-motion";
 import PipelineCanvas from "./PipelineCanvas";
+import SceneErrorBoundary from "./SceneErrorBoundary";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const HeroScene = lazy(() => import("./HeroScene"));
@@ -27,9 +28,11 @@ export default function HeroVisual({ scrollRef }) {
       {reducedMotion ? (
         <PipelineCanvas />
       ) : (
-        <Suspense fallback={<PipelineCanvas />}>
-          {inView && <HeroScene scrollRef={scrollRef} tier={tier} />}
-        </Suspense>
+        <SceneErrorBoundary fallback={<PipelineCanvas />}>
+          <Suspense fallback={<PipelineCanvas />}>
+            {inView && <HeroScene scrollRef={scrollRef} tier={tier} />}
+          </Suspense>
+        </SceneErrorBoundary>
       )}
     </div>
   );
