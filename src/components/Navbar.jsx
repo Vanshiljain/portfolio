@@ -27,11 +27,15 @@ export default function Navbar() {
   function handleNavClick(e, href) {
     e.preventDefault();
     setOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
-      history.pushState(null, "", href);
-    }
+    // Deferred: firing scrollIntoView in the same tick as closing the
+    // animated mobile dropdown gets the scroll silently cancelled.
+    setTimeout(() => {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+        history.pushState(null, "", href);
+      }
+    }, 0);
   }
 
   return (

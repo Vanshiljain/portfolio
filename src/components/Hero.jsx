@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import PipelineCanvas from "./PipelineCanvas";
 import MagneticButton from "./MagneticButton";
+import TiltCard from "./TiltCard";
 import { profile } from "../data/resume";
 
 const container = {
@@ -96,66 +97,86 @@ export default function Hero() {
         style={{ rotateX, rotateY, transformPerspective: 1200 }}
         className="relative z-10 mx-auto w-full max-w-7xl px-6 py-32 md:px-10"
       >
-        <motion.p
-          variants={item}
-          className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-cobalt-300"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
-          </span>
-          Open to work — Indore, India
-        </motion.p>
+        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-16">
+          <div className="md:col-span-7">
+            <motion.p
+              variants={item}
+              className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-cobalt-300"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
+              </span>
+              Open to work — Indore, India
+            </motion.p>
 
-        <motion.h1
-          variants={item}
-          className="font-display text-[13vw] leading-[0.95] tracking-tight text-paper sm:text-6xl md:text-7xl lg:text-[6.5rem]"
-        >
-          Vanshil <span className="text-gradient-signal-animated italic">Jain</span>
-        </motion.h1>
+            <motion.h1
+              variants={item}
+              className="font-display text-[13vw] leading-[0.95] tracking-tight text-paper sm:text-6xl md:text-7xl lg:text-[6.5rem]"
+            >
+              Vanshil <span className="text-gradient-signal-animated italic">Jain</span>
+            </motion.h1>
 
-        <motion.div
-          variants={item}
-          className="mt-6 flex h-8 items-center font-mono text-lg text-amber-300 md:text-xl"
-        >
-          <span>{typed}</span>
-          <span className="ml-1 inline-block h-[1.1em] w-[2px] animate-pulse bg-amber-300" />
-        </motion.div>
+            <motion.div
+              variants={item}
+              className="mt-6 flex h-8 items-center font-mono text-lg text-amber-300 md:text-xl"
+            >
+              <span>{typed}</span>
+              <span className="ml-1 inline-block h-[1.1em] w-[2px] animate-pulse bg-amber-300" />
+            </motion.div>
 
-        <motion.p
-          variants={item}
-          className="mt-6 max-w-2xl font-display text-xl italic text-paper-dim md:text-2xl"
-        >
-          {profile.pitch}
-        </motion.p>
+            <motion.p
+              variants={item}
+              className="mt-6 max-w-2xl font-display text-xl italic text-paper-dim md:text-2xl"
+            >
+              {profile.pitch}
+            </motion.p>
 
-        <motion.p
-          variants={item}
-          className="mt-4 max-w-xl font-mono text-sm leading-relaxed text-paper-dim/80"
-        >
-          Multi-agent orchestration, vector-backed memory, and enterprise
-          automation — built with NestJS, React, LangChain, MCP, and Qdrant.
-        </motion.p>
+            <motion.p
+              variants={item}
+              className="mt-4 max-w-xl font-mono text-sm leading-relaxed text-paper-dim/80"
+            >
+              Multi-agent orchestration, vector-backed memory, and enterprise
+              automation — built with NestJS, React, LangChain, MCP, and Qdrant.
+            </motion.p>
 
-        <motion.div variants={item} className="mt-12 flex flex-wrap items-center gap-4">
-          <MagneticButton
-            href="#projects"
-            className="cursor-hover group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-paper px-7 py-3.5 font-mono text-xs uppercase tracking-widest text-ink-950"
+            <motion.div variants={item} className="mt-12 flex flex-wrap items-center gap-4">
+              <MagneticButton
+                href="#projects"
+                className="cursor-hover group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-paper px-7 py-3.5 font-mono text-xs uppercase tracking-widest text-ink-950"
+              >
+                <span className="relative z-10">View the work</span>
+                <span className="relative z-10 transition-transform group-hover:translate-x-1">→</span>
+                <span className="absolute inset-0 -z-0 bg-gradient-to-r from-amber-400 to-cobalt-400 opacity-0 transition-opacity group-hover:opacity-100" />
+              </MagneticButton>
+
+              <MagneticButton
+                as="a"
+                href={profile.resumeFile}
+                download
+                className="cursor-hover inline-flex items-center gap-2 rounded-full border border-cobalt-400/30 px-7 py-3.5 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-amber-400 hover:text-amber-300"
+              >
+                Download résumé ↓
+              </MagneticButton>
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={item}
+            className="flex justify-center md:col-span-5 md:justify-end"
           >
-            <span className="relative z-10">View the work</span>
-            <span className="relative z-10 transition-transform group-hover:translate-x-1">→</span>
-            <span className="absolute inset-0 -z-0 bg-gradient-to-r from-amber-400 to-cobalt-400 opacity-0 transition-opacity group-hover:opacity-100" />
-          </MagneticButton>
-
-          <MagneticButton
-            as="a"
-            href={profile.resumeFile}
-            download
-            className="cursor-hover inline-flex items-center gap-2 rounded-full border border-cobalt-400/30 px-7 py-3.5 font-mono text-xs uppercase tracking-widest text-paper transition-colors hover:border-amber-400 hover:text-amber-300"
-          >
-            Download résumé ↓
-          </MagneticButton>
-        </motion.div>
+            <TiltCard className="group cursor-hover relative w-56 sm:w-64 md:w-full md:max-w-sm">
+              <div className="conic-border glow-cobalt relative aspect-square overflow-hidden rounded-[2rem] bg-ink-800">
+                <img
+                  src="/profile.png"
+                  alt="Vanshil Jain"
+                  className="h-full w-full object-cover"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink-950/40 via-transparent to-transparent" />
+              </div>
+            </TiltCard>
+          </motion.div>
+        </div>
 
         <motion.div
           variants={item}

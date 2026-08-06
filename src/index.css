@@ -173,6 +173,7 @@
     z-index: 45;
     opacity: 0.05;
     mix-blend-mode: overlay;
+    pointer-events: none;
   }
 
   /* Animated aurora mesh — drifting multi-stop color wash */
