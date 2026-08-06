@@ -97,7 +97,7 @@ export const experience = [
   {
     company: "Linkites Infotech",
     role: "Software Engineer (Full Stack & AI)",
-    period: "June 2025 — Present",
+    period: "June 2026 — Present",
     location: "Indore, India",
     current: true,
     projects: [
@@ -119,7 +119,7 @@ export const experience = [
   {
     company: "Linkites Infotech",
     role: "Associate Software Engineer",
-    period: "June 2024 — May 2025",
+    period: "June 2025 — May 2026",
     location: "Indore, India",
     projects: [
       {
@@ -153,7 +153,7 @@ export const experience = [
   {
     company: "Linkites Infotech",
     role: "Junior Software Developer",
-    period: "June 2023 — May 2024",
+    period: "June 2023 — May 2025",
     location: "Indore, India",
     projects: [
       {

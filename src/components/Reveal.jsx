@@ -49,16 +49,34 @@ export function RevealGroup({ children, className = "", stagger = 0.12 }) {
 
 // Clip-path scan-wipe, reserved for section headings — reads as a HUD
 // panel powering on rather than a plain fade/slide.
+//
+// The clip-path lives on an inner span driven by variant propagation
+// rather than its own whileInView: animating clip-path on the same element
+// that Framer Motion's IntersectionObserver is watching stops that
+// observer from ever reporting the element in view, so the reveal gets
+// stuck at its (invisible) initial state while still reserving its full
+// layout height — a large blank gap above whatever follows.
 export function ScanReveal({ children, className = "", delay = 0, as: Component = motion.h2 }) {
   return (
     <Component
       className={className}
-      initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0.4 }}
-      whileInView={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.9, delay, ease: [0.76, 0, 0.24, 1] }}
     >
-      {children}
+      <motion.span
+        className="inline-block"
+        variants={{
+          hidden: { clipPath: "inset(0 100% 0 0)", opacity: 0.4 },
+          show: {
+            clipPath: "inset(0 0% 0 0)",
+            opacity: 1,
+            transition: { duration: 0.9, delay, ease: [0.76, 0, 0.24, 1] },
+          },
+        }}
+      >
+        {children}
+      </motion.span>
     </Component>
   );
 }
